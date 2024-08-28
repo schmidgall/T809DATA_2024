@@ -33,9 +33,7 @@ def gen_data(
         for j in range(n):
             targets.append(i)
         classes.append(i)
-
-
-    return (features , targets , classes)
+    return (np.array(features) , np.array(targets) , np.array(classes))
 
 
 def mean_of_class(
@@ -47,7 +45,16 @@ def mean_of_class(
     Estimate the mean of a selected class given all features
     and targets in a dataset
     '''
-    ...
+    sum = 0
+    number = 0
+    for i in range(len(features)):
+        if (targets[i] == selected_class):
+            sum += features[i]
+            number += 1
+    if (number == 0):
+        return 0
+    return (sum/number)
+
 
 
 def covar_of_class(
@@ -59,7 +66,15 @@ def covar_of_class(
     Estimate the covariance of a selected class given all
     features and targets in a dataset
     '''
-    ...
+    sum = list(())
+    for i in range(len(features)):
+        if (targets[i] == selected_class):
+            sum.append(features[i])
+    if (len(sum) == 0):
+        return 0
+    sum = np.array(sum)
+    return np.cov(sum)
+    
 
 
 def likelihood_of_class(
@@ -72,7 +87,16 @@ def likelihood_of_class(
     from a multivariate normal distribution, given the mean
     and covariance of the distribution.
     '''
-    ...
+    if (class_cov == 0):
+        return 0
+    
+    probab = list(())
+    for value in feature:
+        calc = norm.pdf(value, class_mean, class_cov)
+        probab.append(calc)
+    return np.array(probab)
+
+    
 
 
 def maximum_likelihood(
@@ -118,17 +142,27 @@ if __name__ == "__main__":
     # Section 1
     #gen_data(2, [0, 2], [4, 4])
     #gen_data(1, [-1, 0, 1], [2, 2, 2])
-    features, targets, classes = gen_data(5, [-1 , 1], [np.power(25, (1/2)), np.power(5, (1/2))])
-    features, targets, classes = gen_data(5, [-1, 0, 1], [2, 2, 2])
-    #(train_features, train_targets), (test_features, test_targets) = split_train_test(features, targets, train_ratio=0.8)
+    features, targets, classes = gen_data(25, [-1 , 1], [np.power(5, (1/2)), np.power(5, (1/2))])
+    (train_features, train_targets), (test_features, test_targets) = split_train_test(features, targets, train_ratio=0.8)
 
     # Section 2
-    colors = ["blue", "orange", "yellow", "red", "green", "black"]
-    for color in classes:
-        for i in range(len(features)):
-            if (targets[i] == color):
-                plt.scatter(features[i], 0, c=colors[color])    
-    plt.show()
-    
+    #colors = ["blue", "orange", "yellow", "red", "green", "black"]
+    #markers = [".", "x", "+", "*", "1", "p"]
+    #for color in classes:
+    #    for i in range(len(features)):
+    #        if (targets[i] == color):
+    #           plt.scatter(features[i], 0, color=colors[color], marker=markers[color])    
+    #plt.show()
+
+    # Section 3
+    #mean = mean_of_class(train_features, train_targets, 0)
+
+    # Section 4
+    #cov = covar_of_class(train_features, train_targets, 0)
+
+    # Section 5
+    #class_mean = mean_of_class(train_features, train_targets, 0)
+    #class_cov = covar_of_class(train_features, train_targets, 0)
+    #probability = likelihood_of_class(test_features[0:3], class_mean, class_cov)
 
     pass
