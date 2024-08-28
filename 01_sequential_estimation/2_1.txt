@@ -1,0 +1,4 @@
+Section 2:
+The data points are just random points out of the set of the normal function with the given mean and variance. The mean of this values are not the original mean.
+For a better solution it is possible to increase the numbers of data points (e.g 800 instead of 300).
+A second option would be to decrease the variance.
