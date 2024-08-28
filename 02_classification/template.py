@@ -1,6 +1,6 @@
-# Author: 
-# Date:
-# Project: 
+# Author: edit by Sara Schmidgall
+# Date: 28.08.2024
+# Project: DMML
 # Acknowledgements: 
 #
 
@@ -21,7 +21,21 @@ def gen_data(
     Return n data points, their classes and a unique list of all classes, from each normal distributions
     shifted and scaled by the values in locs and scales
     '''
-    ...
+    features = list(())
+    targets = list(())
+    classes = list(())
+    np.set_printoptions(legacy='1.25')
+
+    for i in range(len(locs)):
+        featureValue = norm.rvs(locs[i], scales[i], n)
+        for k in range(len(featureValue)):
+            features.append(featureValue[k])
+        for j in range(n):
+            targets.append(i)
+        classes.append(i)
+
+
+    return (features , targets , classes)
 
 
 def mean_of_class(
@@ -101,4 +115,20 @@ if __name__ == "__main__":
     """
     Keep all your test code here or in another file.
     """
+    # Section 1
+    #gen_data(2, [0, 2], [4, 4])
+    #gen_data(1, [-1, 0, 1], [2, 2, 2])
+    features, targets, classes = gen_data(5, [-1 , 1], [np.power(25, (1/2)), np.power(5, (1/2))])
+    features, targets, classes = gen_data(5, [-1, 0, 1], [2, 2, 2])
+    #(train_features, train_targets), (test_features, test_targets) = split_train_test(features, targets, train_ratio=0.8)
+
+    # Section 2
+    colors = ["blue", "orange", "yellow", "red", "green", "black"]
+    for color in classes:
+        for i in range(len(features)):
+            if (targets[i] == color):
+                plt.scatter(features[i], 0, c=colors[color])    
+    plt.show()
+    
+
     pass
