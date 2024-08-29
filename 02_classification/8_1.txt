@@ -1,0 +1,16 @@
+Section 8
+
+Question A:
+The estimations of the second dataset are more accurate. The plot shows two clearly seperated groups (classes) of points around the real mean. The points of the same class are very closely to each other.
+The datapoints (second values) are closer to each other (less variance) throught the smaller standard deviation (sqrt(2) instead of sqrt(5)).
+With the higher absolut distance between the means of the normal distributions, the estimates of the different classes of the second datast are more seperated.
+
+
+Question B:
+1. With increasing number of datapoints, the accuracy is rising.
+More datapoints leads to a higher probability that the real mean is hit. More datapoints are balancing the deviation from the mean.
+
+2. The mean of the datapoints are changing but there are no differences on the accurency. It just defines the position of the point the dataset should referes to.
+
+3. With increasing standard deviation, the accuracy gets smaller.
+The area of possible points gets larger by increasing the standard deviation. So there are points more away from the actual mean.  

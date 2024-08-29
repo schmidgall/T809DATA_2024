@@ -136,7 +136,7 @@ def predict(likelihoods: np.ndarray):
     You should return a [likelihoods.shape[0]] shaped numpy
     array of predictions, e.g. [0, 1, 0, ..., 1, 2]
     '''
-    ...
+    return (np.argmax(likelihoods, axis=1))
 
 
 if __name__ == "__main__":
@@ -144,33 +144,40 @@ if __name__ == "__main__":
     Keep all your test code here or in another file.
     """
     # Section 1
-    #gen_data(2, [0, 2], [4, 4])
-    #gen_data(1, [-1, 0, 1], [2, 2, 2])
-    features, targets, classes = gen_data(25, [-1 , 1], [np.power(5, (1/2)), np.power(5, (1/2))])
+    features, targets, classes = gen_data(2, [0, 2], [4, 4])
+    features, targets, classes = gen_data(1, [-1, 0, 1], [2, 2, 2])
+    
+    # For Section
+    features, targets, classes = (25, [-1 , 1], [np.power(5, (1/2)), np.power(5, (1/2))])
     (train_features, train_targets), (test_features, test_targets) = split_train_test(features, targets, train_ratio=0.8)
 
     # Section 2
-    #colors = ["blue", "orange", "yellow", "red", "green", "black"]
-    #markers = [".", "x", "+", "*", "1", "p"]
-    #for color in classes:
-    #    for i in range(len(features)):
-    #        if (targets[i] == color):
-    #           plt.scatter(features[i], 0, color=colors[color], marker=markers[color])    
-    #plt.show()
+    colors = ["blue", "orange", "yellow", "red", "green", "black"]
+    markers = [".", "x", "+", "*", "1", "p"]
+    for color in classes:
+       for i in range(len(features)):
+           if (targets[i] == color):
+              plt.scatter(features[i], 0, color=colors[color], marker=markers[color])    
+    plt.show()
 
     # Section 3
-    #mean = mean_of_class(train_features, train_targets, 0)
+    mean = mean_of_class(train_features, train_targets, 0)
 
     # Section 4
-    #cov = covar_of_class(train_features, train_targets, 0)
+    cov = covar_of_class(train_features, train_targets, 0)
 
     # Section 5
-    # class_mean = mean_of_class(train_features, train_targets, 0)
-    # class_cov = covar_of_class(train_features, train_targets, 0)
-    # probability = likelihood_of_class(test_features[0:3], class_mean, class_cov)
+    class_mean = mean_of_class(train_features, train_targets, 0)
+    class_cov = covar_of_class(train_features, train_targets, 0)
+    probability = likelihood_of_class(test_features[0:3], class_mean, class_cov)
 
     # Section 6
-    maximum_likelihood(train_features, train_targets, test_features, classes)
+    likelihoods = maximum_likelihood(train_features, train_targets, test_features, classes)
 
+    # Section 7
+    prediction = predict(likelihoods)
 
+    # Section 8
+    features, targets, classes = gen_data(25, [-4, 4], [np.power(2, (1/2)), np.power(2, (1/2))])
+    
     pass
