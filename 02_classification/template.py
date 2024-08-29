@@ -87,16 +87,11 @@ def likelihood_of_class(
     from a multivariate normal distribution, given the mean
     and covariance of the distribution.
     '''
-    if (class_cov == 0):
-        return 0
-    
     probab = list(())
-    for value in feature:
-        calc = norm.pdf(value, class_mean, class_cov)
+    for value in range(len(feature)):
+        calc = norm.pdf(feature[value], class_mean, class_covar)
         probab.append(calc)
     return np.array(probab)
-
-    
 
 
 def maximum_likelihood(
@@ -116,10 +111,19 @@ def maximum_likelihood(
     '''
     means, covs = [], []
     for class_label in classes:
-        ...
-    likelihoods = []
+        means.append(mean_of_class(train_features, train_targets, class_label))
+        covs.append(covar_of_class(train_features, train_targets, class_label))
+ 
+    likelihoods = np.zeros((test_features.shape[0], len(means)))
+    likelihood = 0
+    classSaver = []    
     for i in range(test_features.shape[0]):
-        ...
+        for j in range(len(means)):
+            likelihood = likelihood_of_class(test_features, means[j], covs[j])
+            classSaver.append(likelihood[i])
+        likelihoods[i] = classSaver
+        classSaver.clear()
+
     return np.array(likelihoods)
 
 
@@ -161,8 +165,12 @@ if __name__ == "__main__":
     #cov = covar_of_class(train_features, train_targets, 0)
 
     # Section 5
-    #class_mean = mean_of_class(train_features, train_targets, 0)
-    #class_cov = covar_of_class(train_features, train_targets, 0)
-    #probability = likelihood_of_class(test_features[0:3], class_mean, class_cov)
+    # class_mean = mean_of_class(train_features, train_targets, 0)
+    # class_cov = covar_of_class(train_features, train_targets, 0)
+    # probability = likelihood_of_class(test_features[0:3], class_mean, class_cov)
+
+    # Section 6
+    maximum_likelihood(train_features, train_targets, test_features, classes)
+
 
     pass
