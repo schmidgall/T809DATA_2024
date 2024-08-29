@@ -35,7 +35,6 @@ def update_sequence_mean(
     '''
     return mu + (1/n) * (x - mu)
 
-
 def _plot_sequence_estimate():
     data = gen_data(100, 2, np.array([0,0]), 3)
     estimates = [np.array([0, 0])]
@@ -47,7 +46,7 @@ def _plot_sequence_estimate():
     plt.plot([e[1] for e in estimates], label='Second dimension')
 
     plt.legend(loc='upper center')
-    #plt.show()
+    plt.show()
 
 
 def _square_error(y: np.ndarray, y_hat: np.ndarray) -> np.ndarray:
@@ -94,22 +93,22 @@ if __name__ == "__main__":
     Keep all your test code here or in another file.
     """
     # Section 1
-    #X = gen_data(2, 3, np.array([0, 1, -1]), 1.3)
-    #X = gen_data(5, 1, np.array([0.5]), 0.5)
+    X = gen_data(2, 3, np.array([0, 1, -1]), 1.3)
+    X = gen_data(5, 1, np.array([0.5]), 0.5)
 
     # Section 2
-    #dataPoints = gen_data(300, 2, np.array([-1, 2]), np.power(4,1/2))
-    #scatter_2d_data(dataPoints)
-    #bar_per_axis(dataPoints)
+    dataPoints = gen_data(300, 2, np.array([-1, 2]), np.power(4,1/2))
+    scatter_2d_data(dataPoints)
+    bar_per_axis(dataPoints)
 
     # Section 3
-    #X = gen_data(300, 2, np.array([-1, 2]), np.power(4,1/2))
-    #mean = np.mean(X, 0)
-    #new_x = gen_data(1, 2, np.array([0, 0]), 1)
-    #update_sequence_mean(mean, new_x, X.shape[0]+1)
+    X = gen_data(300, 2, np.array([-1, 2]), np.power(4,1/2))
+    mean = np.mean(X, 0)
+    new_x = gen_data(1, 2, np.array([0, 0]), 1)
+    new_update = update_sequence_mean(mean, new_x, X.shape[0]+1)
 
     # Section 4
-    #_plot_sequence_estimate()
+    _plot_sequence_estimate()
 
     # Section 5
     _plot_mean_square_error()
