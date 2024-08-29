@@ -21,9 +21,9 @@ def gen_data(
     Return n data points, their classes and a unique list of all classes, from each normal distributions
     shifted and scaled by the values in locs and scales
     '''
-    features = list(())
-    targets = list(())
-    classes = list(())
+    features = []
+    targets = []
+    classes = []
     np.set_printoptions(legacy='1.25')
 
     for i in range(len(locs)):
@@ -33,7 +33,7 @@ def gen_data(
         for j in range(n):
             targets.append(i)
         classes.append(i)
-    return (np.array(features) , np.array(targets) , np.array(classes))
+    return (np.array(features) , np.array(targets), np.array(classes))
 
 
 def mean_of_class(
@@ -146,16 +146,15 @@ if __name__ == "__main__":
     # Section 1
     features, targets, classes = gen_data(2, [0, 2], [4, 4])
     features, targets, classes = gen_data(1, [-1, 0, 1], [2, 2, 2])
-    
-    # For Section
-    features, targets, classes = (25, [-1 , 1], [np.power(5, (1/2)), np.power(5, (1/2))])
+
+    features, targets, classes = gen_data(25, [-1 , 1], [np.power(5, (1/2)), np.power(5, (1/2))])
     (train_features, train_targets), (test_features, test_targets) = split_train_test(features, targets, train_ratio=0.8)
 
     # Section 2
     colors = ["blue", "orange", "yellow", "red", "green", "black"]
     markers = [".", "x", "+", "*", "1", "p"]
     for color in classes:
-       for i in range(len(features)):
+       for i in range(features.shape[0]):
            if (targets[i] == color):
               plt.scatter(features[i], 0, color=colors[color], marker=markers[color])    
     plt.show()
