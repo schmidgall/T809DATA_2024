@@ -66,16 +66,11 @@ def covar_of_class(
     Estimate the covariance of a selected class given all
     features and targets in a dataset
     '''
-    sum = list(())
+    sum = []
     for i in range(len(features)):
         if (targets[i] == selected_class):
             sum.append(features[i])
-    if (len(sum) == 0):
-        return 0
-    sum = np.array(sum)
     return np.cov(sum)
-    
-
 
 def likelihood_of_class(
     feature: np.ndarray,
