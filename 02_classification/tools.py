@@ -45,5 +45,4 @@ def split_train_test(
         test_features, test_targets = features[split_index:-1],\
             targets[split_index: -1]
 
-
     return (train_features, train_targets), (test_features, test_targets)
