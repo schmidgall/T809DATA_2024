@@ -1,6 +1,6 @@
-# Author: 
-# Date:
-# Project: 
+# Author: edit by Sara Schmidgall
+# Date: 02.09.2024
+# Project: DMML
 # Acknowledgements: 
 #
 
@@ -31,8 +31,15 @@ def mvn_basis(
     * fi - [NxM] is the basis function vectors containing a basis function
     output fi for each data vector x in features
     '''
-    pass
-
+    solution = []
+    for j in range(features.shape[0]):
+        saver = []
+        for i in range(mu.shape[0]):
+            solution2 = multivariate_normal.pdf(features[j], mu[i], sigma)
+            saver.append(solution2)
+        solution.append(saver)
+    solution = torch.tensor(solution)
+    return solution
 
 def _plot_mvn():
     pass
@@ -78,7 +85,26 @@ def linear_model(
 
 
 if __name__ == "__main__":
-    """
-    Keep all your test code here or in another file.
-    """
+    X, t = load_regression_iris()
+    N, D = X.shape
+    M, var = 10, 10
+    mu = torch.zeros((M, D))
+    for i in range(D):
+        mmin = torch.min(X[:, i])
+        mmax = torch.max(X[:, i])
+        mu[:, i] = torch.linspace(mmin, mmax, M)
+    fi = mvn_basis(X, mu, var)
+    print(fi)
+    print(fi.shape[1])
+    print(fi.shape[0])
+    print(fi[1,2])
+
+    fig = plt.figure()
+    for i in range(fi.shape[0]):
+        for j in range(fi.shape[1]):
+            # fig = plt(fi[1, j], fi[i,0])
+            fig = plt(fi[i], fi[j])
+    plt.show()
+    _plot_mvn()
+
     pass
