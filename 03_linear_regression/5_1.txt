@@ -1,0 +1,6 @@
+When we want to know how good the prediction is, we look on the difference between the real target values and the predictions:
+5_1.png shows the target values and the prediction values. The trend of the values are similar at the first points. That is also visible in 5_2 and 5_3. The difference between the values is until the datapoint 100 low and increases rapidly.
+The over all mean-square-error that is calculated by [1/n * sum((t-pred)^2)] is 0.4333.
+
+
+
