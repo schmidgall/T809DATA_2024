@@ -19,7 +19,7 @@ def gen_data(
     '''Generate n values samples from the k-variate
     normal distribution
     '''
-    covariance = np.power(var, 2) * np.identity(k)
+    covariance = np.power(std, 2) * np.identity(k)
     data = np.empty([n, k])
     for i in range(n):
         data[i] = np.random.multivariate_normal(mean, covariance)
