@@ -151,6 +151,7 @@ def train_nn(
         # total e and misclass for this iteration
         E_total.append(total_error / N)
         misclassification_rate.append(misclassifications / N)
+    print(misclassification_rate)
 
     return W1, W2, torch.tensor(E_total), torch.tensor(misclassification_rate), guesses
 
